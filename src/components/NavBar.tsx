@@ -1,12 +1,14 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { NavigateFunction, NavLink, useNavigate } from "react-router-dom";
 
-import { GlobalProps } from "../App";
+// import { GlobalProps } from "../App";
+
+import { GlobalProps } from "../context/GlobalContext";
 
 
-interface NavBarProps {}
+// interface NavBarProps {}
 
-const NavBar: FunctionComponent<NavBarProps> = () => {
+const NavBar: FunctionComponent = () => {
   const {
     currentUser,
     isDarkMode,

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { User, UserLoginFormValues, UserReg } from "../interfaces/User";
+import {  UserLoginFormValues, UserReg } from "../interfaces/User";
 import { jwtDecode } from "jwt-decode";
 import { Jwt } from "../interfaces/Jwt";
 
@@ -30,7 +30,7 @@ export function getUserDetail(
   id: string,
   token: string
 ): Promise<AxiosResponse> {
-  let config = {
+  const config = {
     method: "get",
     maxBodyLength: Infinity,
     url: `${api}/${id}`,
@@ -44,7 +44,7 @@ export function getUserDetail(
 }
 
 export function getAllUsersDetail(token: string): Promise<AxiosResponse> {
-  let config = {
+  const config = {
     method: "get",
     maxBodyLength: Infinity,
     url: api,

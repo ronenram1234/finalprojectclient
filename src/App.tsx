@@ -1,124 +1,119 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import { createContext, useState } from "react";
-import "./App.css";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import "./App.css";
+import NavBar from "./components/NavBar";
 import Main from "./components/Main";
 import PageNotFound from "./components/PageNotFound";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Footer from "./components/Footer";
+
+import { User } from "./interfaces/User";
+import { Jwt } from "./interfaces/Jwt";
+import { CardRecFull } from "./interfaces/Card";
+
 import {
   getTokenLocalStorage,
-  // getUserDetail,
-  // removeTokenLocalStorage,
-  // tokenToDecoode,
+  getUserDetail,
+  removeTokenLocalStorage,
+  tokenToDecoode,
 } from "./services/userServices";
 
-interface GlobalPropsType {
-  isUserLogedin: boolean;
-  // setIsUsserLogedin: React.Dispatch<React.SetStateAction<boolean>>;
-  // token: string;
-  // setToken: React.Dispatch<React.SetStateAction<string>>;
-  // currentUser: User | null;
-  // setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
-  // cardArray: CardRecFull[] | null;
-  // setCardArray: React.Dispatch<React.SetStateAction<CardRecFull[] | null>>;
+import { getAllCardsFromAPI } from "./utils/cardHelpers";
+import { GlobalProps, GlobalPropsType } from "./context/GlobalContext";
 
-  // isDarkMode: boolean;
-  // setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
-  // searchString: string;
-  // setSearchString: React.Dispatch<React.SetStateAction<string>>;
+import About from "./components/About";
+import FavCards from "./components/FavCards";
+import MyCards from "./components/MyCards";
+import CardDetails from "./components/CardDetails";
+import NewEditCard from "./components/NewEditCard";
+import AdminUsers from "./components/AdminUsers";
+import AdminCards from "./components/AdminCards";
+import AdminStats from "./components/AdminStats";
 
-  // sort: string;
-  // setSort: React.Dispatch<React.SetStateAction<string>>;
-
-  // imageError: string[];
-  // setImageError: React.Dispatch<React.SetStateAction<string[]>>;
-  // addressError:string[];
-  // setAddressError: React.Dispatch<React.SetStateAction<string[]>>;
-}
-export const GlobalProps = createContext<GlobalPropsType>({
-  isUserLogedin: false,
-  // setIsUsserLogedin: () => {},
-  // token: "",
-  // setToken: () => {},
-  // currentUser: null,
-  // setCurrentUser: () => {},
-  // cardArray: null,
-  // setCardArray: () => {},
-
-  // isDarkMode: false,
-  // setIsDarkMode: () => {},
-  // searchString: "",
-  // setSearchString: () => {},
-  // sort: "",
-  // setSort: () => {},
-  // imageError: [],
-  // setImageError: () => {},
-  // addressError:[],
-  // setAddressError: () => {},
-});
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const localToken = getTokenLocalStorage() || "";
-  const [isUserLogedin, setIsUsserLogedin] = useState(
-    localToken === "" ? false : true
-  );
 
-  const globalContextValue = {
+  const [token, setToken] = useState(localToken);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [cardArray, setCardArray] = useState<CardRecFull[] | null>([]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [searchString, setSearchString] = useState("");
+  const [sort, setSort] = useState("");
+  const [imageError, setImageError] = useState<string[]>([]);
+  const [addressError, setAddressError] = useState<string[]>([]);
+  const [isUserLogedin, setIsUsserLogedin] = useState(localToken !== "");
+
+  const globalContextValue: GlobalPropsType = {
     isUserLogedin,
-    // setIsUsserLogedin,
-    // token,
-    // setToken,
-    // currentUser,
-    // setCurrentUser,
-    // cardArray,
-    // setCardArray,
-    // isDarkMode,
-    // setIsDarkMode,
-    // searchString,
-    // setSearchString,
-    // sort,
-    // setSort,
-    // imageError,
-    // setImageError,
-    // addressError,
-    // setAddressError,
+    setIsUsserLogedin,
+    token,
+    setToken,
+    currentUser,
+    setCurrentUser,
+    cardArray,
+    setCardArray,
+    isDarkMode,
+    setIsDarkMode,
+    searchString,
+    setSearchString,
+    sort,
+    setSort,
+    imageError,
+    setImageError,
+    addressError,
+    setAddressError,
   };
-  // const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (localToken !== "") {
+      const jwtUser: Jwt = tokenToDecoode(localToken);
+      getUserDetail(jwtUser._id, localToken)
+        .then((res) => setCurrentUser(res.data))
+        .catch(() => {
+          removeTokenLocalStorage();
+          setIsUsserLogedin(false);
+        });
+    }
+  }, [localToken]);
+
+  useEffect(() => {
+    if (cardArray?.length === 0) {
+      getAllCardsFromAPI(setCardArray);
+    }
+  }, [cardArray]);
+
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", isDarkMode);
+    document.body.classList.toggle("light-mode", !isDarkMode);
+  }, [isDarkMode]);
 
   return (
     <>
-      <h1>formik</h1>
       <ToastContainer />
-
       <GlobalProps.Provider value={globalContextValue}>
         <div className="App">
-          <>
-            <h1>test</h1>
-            <div className="container">
-              <Router>
-                <NavBar />
-                <Routes>
-                  <Route path="/" element={<Main />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/favcards" element={<FavCards />} />
-                  <Route path="/mycards" element={<MyCards />} />
-                  <Route path="/sandbox">
-                    <Route path="adminusers" element={<AdminUsers />} />
-                    <Route path="admincards" element={<AdminCards />} />
-                    <Route path="adminstats" element={<AdminStats />} />
-                  </Route>
-                  <Route path="/carddetails" element={<CardDetails />} />
-                  <Route path="/neweditcard" element={<NewEditCard />} />
-
-                  <Route path="*" element={<PageNotFound />} />
-                </Routes>
-                <Footer />
-              </Router>
-            </div>
-          </>
+          <div className="container">
+            <Router>
+              <NavBar />
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/favcards" element={<FavCards />} />
+                <Route path="/mycards" element={<MyCards />} />
+                <Route path="/sandbox">
+                  <Route path="adminusers" element={<AdminUsers />} />
+                  <Route path="admincards" element={<AdminCards />} />
+                  <Route path="adminstats" element={<AdminStats />} />
+                </Route>
+                <Route path="/carddetails" element={<CardDetails />} />
+                <Route path="/neweditcard" element={<NewEditCard />} />
+                <Route path="*" element={<PageNotFound />} />
+              </Routes>
+              <Footer />
+            </Router>
+          </div>
         </div>
       </GlobalProps.Provider>
     </>
