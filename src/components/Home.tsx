@@ -15,7 +15,7 @@ const Home: FunctionComponent = () => {
         id="carouselExampleSlidesOnly"
         className="carousel slide"
         data-bs-ride="carousel"
-        data-bs-interval="4000"
+        data-bs-interval="6000"
       >
         <div className="carousel-inner">
           {/* Slide 1 */}

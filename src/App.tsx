@@ -32,6 +32,8 @@ import AdminStats from "./components/AdminStats";
 
 import { ToastContainer } from "react-toastify";
 import Home from "./components/Home";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App() {
   const localToken = getTokenLocalStorage() || "";
