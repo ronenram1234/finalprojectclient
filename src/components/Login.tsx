@@ -4,7 +4,8 @@ import * as yup from "yup";
 import { UserLoginFormValues } from "../interfaces/User";
 
 import { getUserToken, setTokenLocalStorage } from "../services/userServices";
-import { GlobalProps } from "../App";
+// import { GlobalProps } from "../App";
+import { GlobalProps } from "../context/GlobalContext";
 import TextField from "@mui/material/TextField";
 // import { TextField } from "@mui/material";
 

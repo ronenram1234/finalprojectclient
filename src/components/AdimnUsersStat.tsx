@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
-// import { GlobalProps } from "../App";
+
 import { GlobalProps } from "../context/GlobalContext";
 import { Select, MenuItem } from "@mui/material";
 import { User } from "../interfaces/User";
@@ -47,8 +47,8 @@ const AdinUsersStat: FunctionComponent = () => {
   }, [token]);
 
   useEffect(() => {
-    const  series: string[] = [];
-    const  val: number[] = [];
+    const series: string[] = [];
+    const val: number[] = [];
     const currentMonth = new Date().getMonth();
     const currentYear = new Date().getFullYear();
 
@@ -66,17 +66,17 @@ const AdinUsersStat: FunctionComponent = () => {
       });
 
       series.push(monthYear);
- 
+
       if (usersArray !== null) {
-        
-
-       
-
         const userPerMonth = usersArray.reduce((acc, user) => {
           const validUser: boolean =
             selectedValueType === "1" ||
-            (selectedValueType === "2" && !user.isAdmin && !user.isBusiness) ||
-            (selectedValueType === "3" && !user.isAdmin && user.isBusiness) ||
+            (selectedValueType === "2" &&
+              !user.isAdmin &&
+              !user.isRegisterUser) ||
+            (selectedValueType === "3" &&
+              !user.isAdmin &&
+              user.isRegisterUser) ||
             (user.isAdmin && selectedValueType === "4");
           if (validUser) {
             const date = new Date(user.createdAt);

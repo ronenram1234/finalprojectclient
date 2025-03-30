@@ -1,4 +1,4 @@
-import { FunctionComponent,  useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { UserReg } from "../interfaces/User";
@@ -24,7 +24,6 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsRegister }) => {
   };
 
   const formik = useFormik<UserReg>({
-    
     initialValues: {
       name: {
         first: "",
@@ -46,7 +45,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsRegister }) => {
         houseNumber: 0,
         zip: 0,
       },
-      isBusiness: false,
+      isRegisterUser: false,
     },
     validationSchema: yup.object({
       name: yup.object({
@@ -66,15 +65,15 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsRegister }) => {
         .required()
         .min(5, "must be at least 5 characters"),
       password: yup
-      .string()
-      .required('Password is required')
-      .min(7, 'Password must be at least 7 characters')
-      .max(20, 'Password cannot exceed 20 characters')
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=(.*\d.*\d.*\d.*\d))(?=.*[!*@#$%^&*()_+={}\[\]:;"'<>,.?/-]).{7,20}$/,
-        "Password must contain at least one uppercase letter, one lowercase letter, at least 4 digits, and one special character"
-      ),
-    
+        .string()
+        .required("Password is required")
+        .min(7, "Password must be at least 7 characters")
+        .max(20, "Password cannot exceed 20 characters")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=(.*\d.*\d.*\d.*\d))(?=.*[!*@#$%^&*()_+={}\[\]:;"'<>,.?/-]).{7,20}$/,
+          "Password must contain at least one uppercase letter, one lowercase letter, at least 4 digits, and one special character"
+        ),
+
       image: yup.object({
         url: yup.string().min(14).url("Invalid URL"),
         alt: yup.string().min(2).max(256),
@@ -99,25 +98,19 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsRegister }) => {
           .min(2)
           .max(256),
       }),
-      isBusiness: yup.boolean().required(),
+      isRegisterUser: yup.boolean().required(),
     }),
     onSubmit: async (values) => {
       createUser(values)
         .then((res) => {
-          
-            
-            console.log("sucess ", res.data);
-            successMsg("Registration complete sucessfuly")
-            setIsRegister(false)
-            
-          }
-        )
+          console.log("sucess ", res.data);
+          successMsg("Registration complete sucessfuly");
+          setIsRegister(false);
+        })
         .catch((err) => {
           console.log(err);
-          
-          errorMsg(`Transaction Error - ${err.response.data}`)
-          
-          
+
+          errorMsg(`Transaction Error - ${err.response.data}`);
         });
     },
   });
@@ -219,7 +212,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsRegister }) => {
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                 autoComplete="username"
+                autoComplete="username"
                 fullWidth
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
@@ -240,7 +233,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsRegister }) => {
                   formik.touched.password && Boolean(formik.errors.password)
                 }
                 helperText={formik.touched.password && formik.errors.password}
-                  autoComplete="current-password"
+                autoComplete="current-password"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -429,8 +422,8 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsRegister }) => {
             <label>
               <input
                 type="checkbox"
-                name="isBusiness"
-                checked={formik.values.isBusiness}
+                name="isRegisterUser"
+                checked={formik.values.isRegisterUser}
                 onChange={formik.handleChange}
               />
               <span className="ms-2">Signup as business</span>

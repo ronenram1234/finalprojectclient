@@ -4,6 +4,8 @@ import { NavigateFunction, NavLink, useNavigate } from "react-router-dom";
 // import { GlobalProps } from "../App";
 
 import { GlobalProps } from "../context/GlobalContext";
+import "./NavBar.css";
+
 
 
 // interface NavBarProps {}
@@ -16,7 +18,7 @@ const NavBar: FunctionComponent = () => {
     setIsUsserLogedin,
     setSearchString,
     searchString,
-    setSort
+    setSort,
   } = useContext(GlobalProps);
 
   const navigate: NavigateFunction = useNavigate();
@@ -30,28 +32,30 @@ const NavBar: FunctionComponent = () => {
     setTxt(searchString);
   }, [searchString]);
 
- 
-
   function init(): void {
-     
-   setSearchString(""); // Reset the searchString state
-   setSort(""); // Reset the sort state
+    setSearchString(""); // Reset the searchString state
+    setSort(""); // Reset the sort state
   }
 
   return (
     <>
+
+<div className="company-header">
+  <div className="container-fluid header-container">
+    <div className="company-info">
+      <img src="/card.jpg" alt="Card Image" id="store-logo" />
+      <span className="company-name">TinkerTech</span>
+    </div>
+    
+  </div>
+</div>
+
       <nav
         className="navbar navbar-expand-lg bg-primary text-light"
         data-bs-theme="dark"
       >
         <div className="container-fluid">
-          <NavLink
-            className="navbar-brand text-info text-light-emphasis"
-            to="/"
-            onClick={() => init()}
-          >
-            <div title="View all cards">NEXCRM</div>
-          </NavLink>
+          
           <button
             className="navbar-toggler"
             type="button"
@@ -70,81 +74,148 @@ const NavBar: FunctionComponent = () => {
             <>
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <NavLink className="nav-link" aria-current="page" to="/about"  onClick={() => init()}>
-                    ABOUT
+                  <NavLink
+                    className="nav-link custom-link"
+                    aria-current="page"
+                    to="/about"
+                    onClick={() => init()}
+                  >
+                    HOME
                   </NavLink>
                 </li>
-             
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link custom-link"
+                    aria-current="page"
+                    to="/about"
+                    onClick={() => init()}
+                  >
+                    SELL TO US
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link custom-link"
+                    aria-current="page"
+                    to="/about"
+                    onClick={() => init()}
+                  >
+                    ABOUT THE STORE
+                  </NavLink>
+                </li>
+                
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link custom-link"
+                    aria-current="page"
+                    to="/about"
+                    onClick={() => init()}
+                  >
+                    STORE
+                  </NavLink>
+                </li>
+         
+
                 <li>
                   <NavLink
-                    className="nav-link"
+                    className="nav-link custom-link"
                     aria-current="page"
                     to="/favcards"
                     onClick={() => init()}
                   >
-                    FAV CARDS
+                    FAVORITE LIST
                   </NavLink>
                 </li>
-                {currentUser?.isBusiness && (
+                <li>
+                  <NavLink
+                    className="nav-link custom-link"
+                    aria-current="page"
+                    to="/favcards"
+                    onClick={() => init()}
+                  >
+                    CART LIST
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link custom-link"
+                    aria-current="page"
+                    to="/about"
+                    onClick={() => init()}
+                  >
+                    CONTACT
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link custom-link"
+                    aria-current="page"
+                    to="/about"
+                    onClick={() => init()}
+                  >
+                    HELP
+                  </NavLink>
+                </li>
+                {currentUser?.isRegisterUser && (
                   <li>
                     <NavLink
-                      className="nav-link"
+                      className="nav-link custom-link"
                       aria-current="page"
                       to="/mycards"
                       onClick={() => init()}
                     >
                       MY CARDS
-                      
                     </NavLink>
                   </li>
                 )}
                 {currentUser?.isAdmin && (
-                 <li className="nav-item dropdown">
-                 <a
-                   className="nav-link dropdown-toggle"
-                   href="#"
-                   id="sandboxDropdown"
-                   role="button"
-                   data-bs-toggle="dropdown"
-                   aria-expanded="false"
-                   onClick={(e) => e.preventDefault()} // Prevent default navigation on dropdown toggle
-                 >
-                   SANDBOX
-                 </a>
-                 <ul className="dropdown-menu" aria-labelledby="sandboxDropdown">
-                   <li>
-                     <NavLink
-                       className="dropdown-item"
-                       to="/sandbox/adminusers"
-                       onClick={() => init()}
-                     >
-                       All Users
-                     </NavLink>
-                   </li>
-                   <li>
-                     <NavLink
-                       className="dropdown-item"
-                       to="/sandbox/admincards"
-                       onClick={() => init()}
-                     >
-                       All Cards
-                     </NavLink>
-                   </li>
-                   <li>
-                     <NavLink
-                       className="dropdown-item"
-                       to="/sandbox/adminstats"
-                       onClick={() => init()}
-                     >
-                       Admin Dashboard
-                     </NavLink>
-                   </li>
-                 </ul>
-               </li>
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link custom-link dropdown-toggle"
+                      href="#"
+                      id="sandboxDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      onClick={(e) => e.preventDefault()} // Prevent default navigation on dropdown toggle
+                    >
+                      SANDBOX
+                    </a>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="sandboxDropdown"
+                    >
+                      <li>
+                        <NavLink
+                          className="dropdown-item"
+                          to="/sandbox/adminusers"
+                          onClick={() => init()}
+                        >
+                          All Users
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          className="dropdown-item"
+                          to="/sandbox/admincards"
+                          onClick={() => init()}
+                        >
+                          All Cards
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          className="dropdown-item"
+                          to="/sandbox/adminstats"
+                          onClick={() => init()}
+                        >
+                          Admin Dashboard
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </li>
                 )}
               </ul>
-    
-              
 
               <form
                 className="d-flex mx-auto"

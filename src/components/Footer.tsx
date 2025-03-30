@@ -12,12 +12,10 @@ import { useNavigate } from "react-router-dom";
 // import { GlobalProps } from "../App";
 import { GlobalProps } from "../context/GlobalContext";
 
-
-
-
 const Footer: FunctionComponent = () => {
   const navigate = useNavigate();
-  const { sort, setSort, setSearchString,currentUser } = useContext(GlobalProps);
+  const { sort, setSort, setSearchString, currentUser } =
+    useContext(GlobalProps);
 
   function init(): void {
     setSearchString(""); // Reset the searchString state
@@ -70,19 +68,20 @@ const Footer: FunctionComponent = () => {
               size="2x"
               className="mx-2"
             />
-          </Col>{currentUser?.isBusiness && (
-          <Col xs="auto">
-            <FontAwesomeIcon
-              icon={faAddressCard}
-              onClick={() => {
-                navigate(`/mycards`);
-                init();
-              }}
-              title="OPEN MY CARDS"
-              size="2x"
-              className="mx-2"
-            />
           </Col>
+          {currentUser?.isRegisterUser && (
+            <Col xs="auto">
+              <FontAwesomeIcon
+                icon={faAddressCard}
+                onClick={() => {
+                  navigate(`/mycards`);
+                  init();
+                }}
+                title="OPEN MY CARDS"
+                size="2x"
+                className="mx-2"
+              />
+            </Col>
           )}
         </Row>
       </Container>

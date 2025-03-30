@@ -2,7 +2,8 @@ import axios, { AxiosResponse } from "axios";
 import { NewCard } from "../interfaces/Card";
 // import { GoogleApiWrapper } from 'google-maps-react';
 
-const api: string = `${process.env.REACT_APP_API}/cards`;
+// const api: string = `${process.env.REACT_APP_API}/cards`;
+const api: string = `${import.meta.env.VITE_API}/cards`;
 const googleApi: string = "AIzaSyCxEnj4F8H4Gu2hGfWH-sGPjhGNHwG_Un8";
 
 export function createCard(cardID: string): Promise<AxiosResponse> {

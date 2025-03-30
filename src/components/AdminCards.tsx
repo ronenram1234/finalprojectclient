@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
-// import { GlobalProps } from "../App";
+
 import { GlobalProps } from "../context/GlobalContext";
 
 import ClipLoader from "react-spinners/ClipLoader";

@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Login from "./Login";
-import { GlobalProps } from "../App";
+import { GlobalProps } from "../context/GlobalContext";
 import Register from "./Register";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";

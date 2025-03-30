@@ -1,5 +1,6 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
-import { GlobalProps } from "../App";
+
+import { GlobalProps } from "../context/GlobalContext";
 import { User, UserAdmin } from "../interfaces/User";
 import { errorMsg } from "../services/feedbackService";
 import { getAllUsersDetail } from "../services/userServices";
@@ -23,13 +24,13 @@ const AdminUsers: FunctionComponent<AdminUsersProps> = () => {
       document.body.classList.remove("cursor-loading");
     }
   }, [loading]);
- 
+
   useEffect(() => {
     setLoading(true);
     getAllUsersDetail(token)
       .then((res) => {
         setUsersArray(res.data);
-        
+
         setLoading(false);
       })
       .catch((err) => {
@@ -54,10 +55,10 @@ const AdminUsers: FunctionComponent<AdminUsersProps> = () => {
       addressHouseNumber: user.address.houseNumber || 0,
       addressZip: user.address.zip || 0,
       isAdmin: user.isAdmin ? "Yes" : "No",
-      isBusiness: user.isBusiness ? "Yes" : "No",
+      isRegisterUser: user.isRegisterUser ? "Yes" : "No",
       createdAt: new Date(user.createdAt),
     }));
-    setuserAdmins(userAdminsTmp)
+    setuserAdmins(userAdminsTmp);
   }, [usersArray]);
 
   // Updated columns without the fullName column
@@ -133,7 +134,7 @@ const AdminUsers: FunctionComponent<AdminUsersProps> = () => {
       width: 100,
     },
     {
-      field: "isBusiness",
+      field: "isRegisterUser",
       headerName: "Business",
       width: 120,
     },
@@ -141,10 +142,10 @@ const AdminUsers: FunctionComponent<AdminUsersProps> = () => {
       field: "createdAt",
       headerName: "Created At",
       width: 180,
-       type: 'dateTime',
+      type: "dateTime",
       valueFormatter: (params) => {
         const date = new Date(params);
-      return date.toLocaleDateString("en-US");
+        return date.toLocaleDateString("en-US");
       },
     },
   ];

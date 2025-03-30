@@ -13,7 +13,7 @@ export interface UserAdmin {
   addressHouseNumber: number;
   addressZip: number;
   isAdmin: string;
-  isBusiness: string;
+  isRegisterUser: string;
   createdAt: Date;
 }
 
@@ -42,7 +42,7 @@ export interface User {
     _id?: string;
   };
   isAdmin: boolean;
-  isBusiness: boolean;
+  isRegisterUser: boolean;
   classCode?: string;
   createdAt: string;
 }
@@ -69,7 +69,7 @@ export interface UserReg {
     zip: number;
   };
 
-  isBusiness: boolean;
+  isRegisterUser: boolean;
 }
 
 export interface UserLoginFormValues {

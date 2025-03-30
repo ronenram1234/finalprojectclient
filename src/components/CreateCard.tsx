@@ -14,7 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faRegularHeart } from "@fortawesome/free-regular-svg-icons"; // Regular heart icon
 
-import { GlobalProps } from "../App";
+import { GlobalProps } from "../context/GlobalContext";
 import { deleteCard, setLikeDislike } from "../services/cardServices";
 
 import { useNavigate } from "react-router-dom";
@@ -33,8 +33,15 @@ const CreateCard: FunctionComponent<CreateCardProps> = ({
   originScreen,
 }) => {
   const navigate = useNavigate();
-  const { currentUser, token, cardArray, setCardArray, isDarkMode, imageError, setImageError } =
-    useContext(GlobalProps);
+  const {
+    currentUser,
+    token,
+    cardArray,
+    setCardArray,
+    isDarkMode,
+    imageError,
+    setImageError,
+  } = useContext(GlobalProps);
   const [address, setAddress] = useState<string>(
     `${item.address.street} ${item.address.houseNumber}, ${item.address.city},  ${item.address.country}, ${item.address.zip}`
   );
@@ -50,16 +57,13 @@ const CreateCard: FunctionComponent<CreateCardProps> = ({
 
   // Handle image error
   const handleImageError = () => {
-  
-    !imageError.includes(item._id) && imageError.push(item._id)
-    setImageError(imageError)
+    !imageError.includes(item._id) && imageError.push(item._id);
+    setImageError(imageError);
 
     setImgError(true);
   };
 
   const handleHeartClick = (id: string) => {
-
-
     setLikeDislike(id, token)
       .then((res) => {
         setIsHeartSelected((prev) => !prev);
@@ -103,7 +107,6 @@ const CreateCard: FunctionComponent<CreateCardProps> = ({
             errorMsg("Error deleting");
             console.log(error);
           });
-        
       }
     });
   }
@@ -123,7 +126,9 @@ const CreateCard: FunctionComponent<CreateCardProps> = ({
     <>
       <Col key={ind}>
         <Card
-          className={`h-100 ${isDarkMode ? "bg-dark text-light" : "bg-light text-dark"}`}
+          className={`h-100 ${
+            isDarkMode ? "bg-dark text-light" : "bg-light text-dark"
+          }`}
         >
           <Card.Img
             variant="top"
@@ -167,7 +172,8 @@ const CreateCard: FunctionComponent<CreateCardProps> = ({
               )}
 
               {(currentUser?.isAdmin ||
-                (currentUser?.isBusiness && originScreen === "Mycards")) && (
+                (currentUser?.isRegisterUser &&
+                  originScreen === "Mycards")) && (
                 <>
                   <FontAwesomeIcon
                     icon={faPenToSquare}

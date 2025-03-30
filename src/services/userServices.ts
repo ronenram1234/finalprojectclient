@@ -3,7 +3,8 @@ import {  UserLoginFormValues, UserReg } from "../interfaces/User";
 import { jwtDecode } from "jwt-decode";
 import { Jwt } from "../interfaces/Jwt";
 
-const api: string = `${process.env.REACT_APP_API}/users`;
+// const api: string = `${process.env.REACT_APP_API}/users`;
+const api: string = `${import.meta.env.VITE_API}/users`;
 const tokenKey = "crmUserId";
 
 // access to DB
