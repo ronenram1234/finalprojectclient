@@ -77,7 +77,7 @@ const NavBar: FunctionComponent = () => {
                   <NavLink
                     className="nav-link custom-link"
                     aria-current="page"
-                    to="/about"
+                    to="/home"
                     onClick={() => init()}
                   >
                     HOME

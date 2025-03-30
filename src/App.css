@@ -5,8 +5,6 @@
   text-align: center;
 }
 
-
-
 .card {
   padding: 2em;
 }
@@ -15,6 +13,47 @@
   color: #888;
 }
 
+.block-home {
+  height: 30vh; /* 40% of viewport height */
+  width: 100%; /* Maintain width */
+  object-fit: cover; /* Crop to fit */
+}
 
+/* Style for carousel text with centered positioning */
+.custom-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: rgba(116, 95, 95, 0.8); /* 80% transparent black background */
+  padding: 1rem; /* Add padding for spacing */
+  border-radius: 10px; /* Optional: rounded corners */
+  width: 70%; /* Control width of text box */
+  max-width: 600px;
+}
 
+/* Main heading */
+.carousel-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff; /* White text */
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Text shadow for readability */
+  margin-bottom: 0.5rem;
+}
 
+/* Secondary heading */
+.carousel-text {
+  font-size: 1.5rem;
+  color: #f1f1f1; /* Light grey text */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Add shadow for visibility */
+  margin-bottom: 0.5rem;
+}
+
+/* Small text */
+.carousel-text-small {
+  font-size: 1rem;
+  color: #cccccc; /* Slightly dimmed white text */
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7); /* Maintain visibility */
+  margin-top: 0.5rem;
+}

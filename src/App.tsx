@@ -31,6 +31,7 @@ import AdminCards from "./components/AdminCards";
 import AdminStats from "./components/AdminStats";
 
 import { ToastContainer } from "react-toastify";
+import Home from "./components/Home";
 
 function App() {
   const localToken = getTokenLocalStorage() || "";
@@ -100,6 +101,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/favcards" element={<FavCards />} />
                 <Route path="/mycards" element={<MyCards />} />
                 <Route path="/sandbox">
