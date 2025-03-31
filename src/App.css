@@ -13,10 +13,11 @@
   color: #888;
 }
 
+/* HomeCarousel component */
 .block-home {
-  height: 30vh; /* 40% of viewport height */
-  width: 100%; /* Maintain width */
-  object-fit: cover; /* Crop to fit */
+  height: 30vh; 
+  width: 100%; 
+  object-fit: cover; 
 }
 
 .custom-caption {
@@ -26,7 +27,7 @@
   text-align: center;
 }
 
-/* Main heading */
+
 .carousel-title {
   font-size: 2.5rem;
   font-weight: bold;
@@ -35,7 +36,7 @@
   margin-bottom: 0.5rem;
 }
 
-/* Secondary heading */
+
 .carousel-text {
   font-size: 2rem;
   font-weight: bold;
@@ -44,11 +45,172 @@
   margin-bottom: 0.5rem;
 }
 
-/* Small text */
+
 .carousel-text-small {
   font-size: 1.5rem;
   font-weight: bold;
   color: #cccccc;
   text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
   margin-top: 0.5rem;
+}
+
+/* Home component */
+/* Container */
+.home-container {
+  font-family: "Arial", sans-serif;
+}
+
+/* Sustainability Section */
+.sustainability-section {
+  display: flex;
+  background-color: #a3d49c; /* Green background */
+  padding: 3rem 5%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sustainability-text {
+  width: 50%;
+  font-size: 1.5rem;
+  color: #fff;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.sustainability-content {
+  width: 40%;
+  text-align: left;
+}
+
+.sustainability-content p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+.sustainability-label {
+  background-color: #1ca351; /* Same green background */
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* Impact Section */
+.impact-section {
+  background-color: #1d2f47; /* Dark blue background */
+  padding: 3rem 5%;
+  color: #fff;
+  text-align: center;
+}
+
+.impact-title {
+  font-size: 2rem;
+  color: #4da6ff; /* Light blue text */
+  margin-bottom: 2rem;
+}
+
+/* Stats Container */
+.impact-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.impact-item {
+  width: 30%;
+}
+
+.impact-item h3 {
+  font-size: 1.5rem;
+  color: #4da6ff;
+}
+
+.impact-item p {
+  font-size: 1rem;
+  color: #ddd;
+}
+
+/* Footer Note */
+.impact-note {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #ccc;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* third section */
+
+.third-section {
+  display: flex;
+  background-color: #a3d49c; /* Same green background */
+  padding: 3rem 5%;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Left Text Section */
+.third-content {
+  width: 50%;
+  text-align: left;
+  color: #1d2f47; /* Dark blue text for contrast */
+}
+
+.third-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1d2f47;
+}
+
+.third-content p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/* Right Icons Section */
+.third-icons {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Icon Items */
+.icon-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Font Awesome Icon Styling */
+.icon-style {
+  font-size: 2rem;
+  color: #1d2f47;
+  margin-top: 4px;
+}
+
+.icon-text h3 {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+  color: #1d2f47;
+}
+
+.icon-text p {
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Spin and Pulse Animation Speeds */
+.fa-spin {
+  animation: fa-spin 2s infinite linear;
+}
+
+.fa-pulse {
+  animation: fa-spin 1.5s infinite steps(8);
 }
