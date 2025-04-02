@@ -6,8 +6,6 @@ import { NavigateFunction, NavLink, useNavigate } from "react-router-dom";
 import { GlobalProps } from "../context/GlobalContext";
 import "./NavBar.css";
 
-
-
 // interface NavBarProps {}
 
 const NavBar: FunctionComponent = () => {
@@ -39,23 +37,20 @@ const NavBar: FunctionComponent = () => {
 
   return (
     <>
-
-<div className="company-header">
-  <div className="container-fluid header-container">
-    <div className="company-info">
-      <img src="/card.jpg" alt="Card Image" id="store-logo" />
-      <span className="company-name">TinkerTech</span>
-    </div>
-    
-  </div>
-</div>
+      <div className="company-header">
+        <div className="container-fluid header-container">
+          <div className="company-info">
+            <img src="/card.jpg" alt="Card Image" id="store-logo" />
+            <span className="company-name">TinkerTech</span>
+          </div>
+        </div>
+      </div>
 
       <nav
         className="navbar navbar-expand-lg bg-primary text-light"
         data-bs-theme="dark"
       >
         <div className="container-fluid">
-          
           <button
             className="navbar-toggler"
             type="button"
@@ -87,7 +82,7 @@ const NavBar: FunctionComponent = () => {
                   <NavLink
                     className="nav-link custom-link"
                     aria-current="page"
-                    to="/about"
+                    to="/sellToUs"
                     onClick={() => init()}
                   >
                     SELL TO US
@@ -97,13 +92,13 @@ const NavBar: FunctionComponent = () => {
                   <NavLink
                     className="nav-link custom-link"
                     aria-current="page"
-                    to="/about"
+                    to="/"
                     onClick={() => init()}
                   >
-                    ABOUT THE STORE
+                    ABOUT US
                   </NavLink>
                 </li>
-                
+
                 <li className="nav-item">
                   <NavLink
                     className="nav-link custom-link"
@@ -114,7 +109,6 @@ const NavBar: FunctionComponent = () => {
                     STORE
                   </NavLink>
                 </li>
-         
 
                 <li>
                   <NavLink
@@ -254,12 +248,15 @@ const NavBar: FunctionComponent = () => {
                   style={{ width: "10px", margin: "10px", color: "white" }}
                 ></i>
               )}
-              <img
-                src={currentUser?.image.url}
-                className="img-fluid mx-3"
-                alt={currentUser?.image.alt}
-                style={{ width: "20px", height: "20px", borderRadius: "50%" }}
-              />
+              {currentUser?.image.url && (
+                <img
+                  src={currentUser.image.url}
+                  className="img-fluid mx-3"
+                  alt={currentUser.image.alt || "User avatar"}
+                  style={{ width: "20px", height: "20px", borderRadius: "50%" }}
+                />
+              )}
+         
 
               <form className="d-flex" role="search">
                 <button

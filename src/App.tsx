@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import NavBar from "./components/NavBar";
-import Main from "./components/Main";
+// import Main from "./components/Main";
 import PageNotFound from "./components/PageNotFound";
 import Footer from "./components/Footer";
 
@@ -34,6 +34,7 @@ import { ToastContainer } from "react-toastify";
 import Home from "./components/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import SellToUs from "./components/SellToUs";
 
 function App() {
   const localToken = getTokenLocalStorage() || "";
@@ -101,9 +102,10 @@ function App() {
             <Router>
               <NavBar />
               <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/about" element={<About />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/sellToUs" element={<SellToUs />} />
+                <Route path="/about" element={<About />} />
                 <Route path="/favcards" element={<FavCards />} />
                 <Route path="/mycards" element={<MyCards />} />
                 <Route path="/sandbox">
