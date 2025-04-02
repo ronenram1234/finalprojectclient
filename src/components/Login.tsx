@@ -32,7 +32,6 @@ const Login: FunctionComponent<LoginProps> = ({ setIsRegister }) => {
     initialValues: {
       email: "",
       password: "",
-      
     },
     validationSchema: yup.object({
       email: yup.string().email("Invalid email").required("Email is required"),
@@ -42,20 +41,22 @@ const Login: FunctionComponent<LoginProps> = ({ setIsRegister }) => {
       getUserToken(values)
         .then((res) => {
           if (res.data.length > 0) {
-            successMsg("Succesful login")
-            // console.log(res.data);
+            successMsg("Login successful");
             setToken(res.data);
             setTokenLocalStorage(res.data);
             setIsUsserLogedin(true);
           } else {
-            console.log(values.email);
-            
-            errorMsg(`${values.email} user not found `);
+            errorMsg("Invalid email or password");
           }
         })
         .catch((err) => {
-          console.log(err);
-          errorMsg(`Transaction Error - ${err.response.data}`);
+          if (err.response?.status === 401) {
+            errorMsg("Invalid email or password");
+          } else if (err.response?.status === 404) {
+            errorMsg("User not found");
+          } else {
+            errorMsg("An error occurred during login. Please try again later.");
+          }
         });
     },
   });
@@ -64,7 +65,6 @@ const Login: FunctionComponent<LoginProps> = ({ setIsRegister }) => {
     <div className="container d-flex justify-content-center align-item-center flex-column col-6">
       <h5 className="display-5 my-2">LOGIN</h5>
       <form onSubmit={formik.handleSubmit}>
-        
         <div className="mb-3">
           <TextField
             variant="outlined"
@@ -74,7 +74,7 @@ const Login: FunctionComponent<LoginProps> = ({ setIsRegister }) => {
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-             autoComplete="username"
+            autoComplete="username"
             fullWidth
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
@@ -94,7 +94,7 @@ const Login: FunctionComponent<LoginProps> = ({ setIsRegister }) => {
             fullWidth
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
-              autoComplete="current-password"
+            autoComplete="current-password"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -117,7 +117,6 @@ const Login: FunctionComponent<LoginProps> = ({ setIsRegister }) => {
         </button>
 
         {/* <p style={{ color: "red" }}>{msg}</p> */}
-        
       </form>
 
       <p className="mt-3">

@@ -5,6 +5,6 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    open: true, // 👈 this line auto-opens the browser
+    port: 8001, // Set the development server to listen on port 8001
   },
 });

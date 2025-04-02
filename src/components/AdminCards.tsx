@@ -19,16 +19,14 @@ const AdminCards: FunctionComponent = () => {
 
   const handleChaeckAddress = async (card: CardRecFull): Promise<boolean> => {
     try {
-      const res =
-        await checkAddress(`${card.address.street}, ${card.address.city},   ${card.address.state || ""} ${card.address.zip}
-    ${card.address.country}`);
-      if (res.data.status === "OK") {
-        return true;
-      } else {
-        return false;
-      }
+      const res = await checkAddress(
+        `${card.address.street}, ${card.address.city}, ${
+          card.address.state || ""
+        } ${card.address.zip} ${card.address.country}`
+      );
+      return res.data.status === "OK";
     } catch (err) {
-      console.log("bad address", card.address, err);
+      console.error("Address validation failed:", err);
       return false;
     }
   };
@@ -78,11 +76,10 @@ const AdminCards: FunctionComponent = () => {
 
       setCards(cardAdmins);
     }
-  }, [cardArray,addressError,imageError]);
-
+  }, [cardArray, addressError, imageError]);
 
   const [loading, setLoading] = useState(false);
-  
+
   useEffect(() => {
     if (loading) {
       document.body.classList.add("cursor-loading");
@@ -177,7 +174,7 @@ const AdminCards: FunctionComponent = () => {
       headerName: "Business Number",
       width: 150,
     },
-   
+
     {
       field: "createdAt",
       headerName: "Created At",
@@ -188,7 +185,6 @@ const AdminCards: FunctionComponent = () => {
         return date.toLocaleDateString("en-US");
       },
     },
-    
   ];
   const paginationModel = { page: 0, pageSize: 5 };
 

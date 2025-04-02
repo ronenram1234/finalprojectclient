@@ -14,11 +14,15 @@ const SellToUs: FunctionComponent = () => {
       name: "",
       email: "",
       message: "",
+      termsAccepted: false,
     },
     validationSchema: yup.object({
       name: yup.string().required("Name is required"),
       email: yup.string().email("Invalid email").required("Email is required"),
       message: yup.string(),
+      termsAccepted: yup
+        .bool()
+        .oneOf([true], "You must agree to the terms and conditions"),
     }),
     onSubmit: async (values) => {
       console.log(values);
@@ -92,14 +96,22 @@ const SellToUs: FunctionComponent = () => {
             <input
               type="checkbox"
               className="form-check-input"
-              id="exampleCheck1"
+              id="termsAccepted"
+              name="termsAccepted"
+              checked={formik.values.termsAccepted}
+              onChange={formik.handleChange}
             />
+            <label className="form-check-label" htmlFor="termsAccepted">
+              I agree to the terms and conditions
+            </label>
+            {formik.touched.termsAccepted && formik.errors.termsAccepted && (
+              <div className="text-danger">{formik.errors.termsAccepted}</div>
+            )}
           </div>
-          
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          
+
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
         </form>
       </div>
     </div>
