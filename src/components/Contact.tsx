@@ -5,12 +5,9 @@ import TextField from "@mui/material/TextField";
 import { submitCustomerRequest } from "../services/customerService";
 import { successMsg } from "../services/feedbackService";
 
-// interface SellToUsProps {
+interface Props {}
 
-// }
-
-// const SellToUs: FunctionComponent<SellToUsProps> = () => {
-const SellToUs: FunctionComponent = () => {
+const Contact: FunctionComponent<Props> = () => {
 
   // console.log("sell to us");
   const formik = useFormik({
@@ -38,18 +35,7 @@ const SellToUs: FunctionComponent = () => {
 
   return (
     <div className="container py-4">
-      <p className="h1">Sell To Us</p>
-      <p className="h4 my-4">
-        Tinkertech purchases many types of components and peripherals including
-        memory, processors, hard drives, and more. Connect with us today to see
-        what your equipment is worth!
-      </p>
-      <img
-        src="selltous.jpg"
-        className="img-fluid my-4"
-        alt="selltous"
-        style={{ width: "50%", height: "50%" }}
-      />
+
 
       <div className="border border-primary p-4">
         <form onSubmit={formik.handleSubmit}>
@@ -109,4 +95,4 @@ const SellToUs: FunctionComponent = () => {
   );
 };
 
-export default SellToUs;
+export default Contact;
