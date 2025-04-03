@@ -2,6 +2,8 @@ import { FunctionComponent } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
+import { submitCustomerRequest } from "../services/customerService";
+import { successMsg } from "../services/feedbackService";
 
 // interface SellToUsProps {
 
@@ -9,23 +11,28 @@ import TextField from "@mui/material/TextField";
 
 // const SellToUs: FunctionComponent<SellToUsProps> = () => {
 const SellToUs: FunctionComponent = () => {
+
+  console.log("sell to us");
   const formik = useFormik({
     initialValues: {
       name: "",
       email: "",
       message: "",
-      termsAccepted: false,
     },
     validationSchema: yup.object({
       name: yup.string().required("Name is required"),
       email: yup.string().email("Invalid email").required("Email is required"),
       message: yup.string(),
-      termsAccepted: yup
-        .bool()
-        .oneOf([true], "You must agree to the terms and conditions"),
     }),
     onSubmit: async (values) => {
-      console.log(values);
+      try {
+        const res=await submitCustomerRequest(values);
+        // alert(res);
+        successMsg(res)
+        formik.resetForm();
+      } catch (error) {
+        alert("There was an error submitting your request. Please try again.");
+      }
     },
   });
 
@@ -92,7 +99,7 @@ const SellToUs: FunctionComponent = () => {
               //   helperText={formik.touched.email && formik.errors.email}
             />
           </div>
-          <div className="mb-3 form-check">
+          {/* <div className="mb-3 form-check">
             <input
               type="checkbox"
               className="form-check-input"
@@ -107,7 +114,7 @@ const SellToUs: FunctionComponent = () => {
             {formik.touched.termsAccepted && formik.errors.termsAccepted && (
               <div className="text-danger">{formik.errors.termsAccepted}</div>
             )}
-          </div>
+          </div> */}
 
           <button type="submit" className="btn btn-primary">
             Submit

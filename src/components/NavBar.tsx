@@ -82,7 +82,7 @@ const NavBar: FunctionComponent = () => {
                   <NavLink
                     className="nav-link custom-link"
                     aria-current="page"
-                    to="/sellToUs"
+                    to="/selltous"
                     onClick={() => init()}
                   >
                     SELL TO US
@@ -92,7 +92,7 @@ const NavBar: FunctionComponent = () => {
                   <NavLink
                     className="nav-link custom-link"
                     aria-current="page"
-                    to="/"
+                    to="/aboutus"
                     onClick={() => init()}
                   >
                     ABOUT US

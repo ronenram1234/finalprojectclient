@@ -35,6 +35,7 @@ import Home from "./components/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import SellToUs from "./components/SellToUs";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   const localToken = getTokenLocalStorage() || "";
@@ -104,7 +105,8 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/sellToUs" element={<SellToUs />} />
+                <Route path="/selltots" element={<SellToUs />} />
+                <Route path="/aboutus" element={<AboutUs />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/favcards" element={<FavCards />} />
                 <Route path="/mycards" element={<MyCards />} />
